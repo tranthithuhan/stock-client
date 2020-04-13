@@ -30,10 +30,14 @@ function StockChart () {
       shared: true,
       headerFormat: '<small>{point.key}</small><table>'
     },
+    credits: {
+      enabled: false
+    },
     series
   }
   return (
     <HighchartsReact
+      className="stock-highchart"
       highcharts={ Highcharts }
       options={ options }
     />

@@ -1,5 +1,10 @@
 import { EMPTY_ARRAY, STOCK_CHART_SERIES_OPTION } from './const'
 
+/**
+ * process the stock data to data format corresponding to chart data
+ * @param stocks
+ * @returns {*|[]}
+ */
 export const getStockChartSeries = (stocks) => {
   let chartSeries = EMPTY_ARRAY
 
@@ -23,7 +28,11 @@ export const getStockChartSeries = (stocks) => {
   return chartSeries
 }
 
-
+/**
+ * process the stock data to data format corresponding to table datasource
+ * @param stocks
+ * @returns {*|[]}
+ */
 export const getStockTableDataSource = (stocks = EMPTY_ARRAY) => {
   let dataSource = []
 
@@ -42,7 +51,12 @@ export const getStockTableDataSource = (stocks = EMPTY_ARRAY) => {
   return dataSource || EMPTY_ARRAY
 }
 
-
+/**
+ * round the number
+ * @param number
+ * @param decimals
+ * @returns {number}
+ */
 export const roundDown = (number, decimals) => {
   decimals = decimals || 0;
   return ( Math.floor( number * Math.pow(10, decimals) ) / Math.pow(10, decimals) );

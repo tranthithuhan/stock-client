@@ -8,6 +8,7 @@ export const UPDATE_STOCK_DATA = 'UPDATE_STOCK_DATA'
 const initialState = {
   loading: false,
   error: null,
+  maxTimestamp: 0,
   stocks: []
 }
 
@@ -38,9 +39,11 @@ export default function reducer(state = Immutable(initialState), action) {
       })
 
     case FETCH_DATA_SUCCESS:
-      const newStocks = [...state.stocks, ...action.result.data]
+      const newStocks = [...state.stocks, ...action.result.data.filter(data => data.timestamp >= state.maxTimestamp)]
+
       return Immutable.merge({
         stocks: newStocks,
+        maxTimestamp: Math.max(...newStocks.map(data => data.timestamp)),
         loading: false,
         error: null
       })

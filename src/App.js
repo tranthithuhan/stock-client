@@ -1,7 +1,6 @@
 import React from 'react'
 import { Layout } from 'antd'
 import Stock from './components/Stock'
-import StockTable from './components/StockTable'
 
 const { Header, Content } = Layout
 
@@ -13,8 +12,6 @@ function App () {
 
         <Content>
           <Stock/>
-
-          <StockTable/>
         </Content>
       </Layout>
     </div>

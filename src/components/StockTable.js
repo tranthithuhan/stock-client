@@ -1,23 +1,26 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'antd'
-import moment from 'moment'
 import { getStockTableDataSource, roundDown } from '../utils'
 import TableCellInput from './TableCellInput'
 
 function StockTable () {
   const stocksData = useSelector(state => state.stock.stocks)
 
-  const dataSource = getStockTableDataSource(stocksData)
+  const dataSource = getStockTableDataSource(
+    stocksData
+  )
+
 
   let columns = Object.keys(dataSource[0] || []).map(timestamp => {
     return {
-      title: parseInt(timestamp) ? moment(parseInt(timestamp)).format('h:mm:ss') : timestamp,
+      title: '',
+      width: 100,
       dataIndex: timestamp,
       render: (text, record, index) => {
         return parseInt(timestamp) ?
           <TableCellInput
-            value={ roundDown(text, 3) }
+            value={ roundDown(text, 2) }
             timestamp={timestamp}
             stockName={dataSource[index].name}
           /> :
@@ -32,6 +35,7 @@ function StockTable () {
       dataSource={ dataSource }
       rowKey={ row => row.name }
       columns={ columns }
+      scroll={{ x: 'max-content', y: 'max-content' }}
     />
   )
 }
