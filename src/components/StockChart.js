@@ -8,7 +8,7 @@ import { getStockChartSeries, roundDown } from '../utils'
 function StockChart () {
   const stocksData = useSelector(state => state.stock.stocks)
   const series = getStockChartSeries(stocksData)
-  console.log(series)
+
   const options = {
     chart: {
       type: 'line'

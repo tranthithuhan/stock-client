@@ -3,6 +3,7 @@ import Immutable from 'seamless-immutable'
 export const FETCH_DATA = 'FETCH_DATA'
 export const FETCH_DATA_SUCCESS = 'FETCH_DATASUCCESS'
 export const FETCH_DATA_FAIL = 'FETCH_DATA_FAIL'
+export const UPDATE_STOCK_DATA = 'UPDATE_STOCK_DATA'
 
 const initialState = {
   loading: false,
@@ -11,10 +12,18 @@ const initialState = {
 }
 
 export const fetchData = (count = 20) => {
-  console.log(count)
   return {
     types: [FETCH_DATA, FETCH_DATA_SUCCESS, FETCH_DATA_SUCCESS],
     promise: client => client.get('/', {params: {count}})
+  }
+}
+
+export const updateStockData = (timestamp, value, stockName) => {
+  return dispatch => {
+    dispatch({
+      type: UPDATE_STOCK_DATA,
+      timestamp, value, stockName
+    })
   }
 }
 
@@ -34,6 +43,24 @@ export default function reducer(state = Immutable(initialState), action) {
         stocks: newStocks,
         loading: false,
         error: null
+      })
+
+    case UPDATE_STOCK_DATA:
+
+      return Immutable.merge({
+        stocks: state.stocks.map(d => {
+          if (`${d.timestamp}` === action.timestamp) {
+            return {
+              ...d,
+              stocks: {
+                ...d.stocks,
+                [action.stockName]: parseFloat(action.value)
+              }
+            }
+          }
+
+          return d;
+        })
       })
 
     default:

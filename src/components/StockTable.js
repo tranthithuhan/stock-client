@@ -10,12 +10,18 @@ function StockTable () {
 
   const dataSource = getStockTableDataSource(stocksData)
 
-  let columns = Object.keys(dataSource[0] || []).map(keyName => {
+  let columns = Object.keys(dataSource[0] || []).map(timestamp => {
     return {
-      title: parseInt(keyName) ? moment(parseInt(keyName)).format('h:mm:ss') : keyName,
-      dataIndex: keyName,
+      title: parseInt(timestamp) ? moment(parseInt(timestamp)).format('h:mm:ss') : timestamp,
+      dataIndex: timestamp,
       render: (text, record, index) => {
-        return parseInt(keyName) ? <TableCellInput value={ roundDown(text, 3) }/> : text
+        return parseInt(timestamp) ?
+          <TableCellInput
+            value={ roundDown(text, 3) }
+            timestamp={timestamp}
+            stockName={dataSource[index].name}
+          /> :
+          text
       }
     }
   })

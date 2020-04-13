@@ -3,9 +3,6 @@ import { EMPTY_ARRAY, STOCK_CHART_SERIES_OPTION } from './const'
 export const getStockChartSeries = (stocks) => {
   let chartSeries = EMPTY_ARRAY
 
-  console.log(stocks)
-
-
   chartSeries = stocks.reduce((result, stock) => {
     Object.keys(stock.stocks).forEach((stockName, index) => {
       if(result.find(item => item.id === stockName)) {
