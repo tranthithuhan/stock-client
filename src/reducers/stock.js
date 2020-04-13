@@ -29,21 +29,9 @@ export default function reducer(state = Immutable(initialState), action) {
       })
 
     case FETCH_DATA_SUCCESS:
-      const stocks = action.result.data.reduce((result, stockData) => {
-        Object.keys(stockData.stocks).forEach(stockName => {
-          const newStockData = [stockData.timestamp, stockData.stocks[stockName]]
-          if (result[stockName]) {
-            result[stockName].push(newStockData)
-          } else {
-            result[stockName] = [newStockData]
-          }
-        })
-
-        return result
-      }, {})
-
+      const newStocks = [...state.stocks, ...action.result.data]
       return Immutable.merge({
-        stocks: stocks,
+        stocks: newStocks,
         loading: false,
         error: null
       })
