@@ -1,13 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Layout } from 'antd'
+import Stock from './components/Stock'
 
-function App() {
+const { Header, Content } = Layout
+
+function App () {
   return (
-    <div className="App">
-      Hello world
+    <div className="App" data-testid="App">
+      <Layout>
+        <Header className="header" data-testid="header">Cours du CAC40 et du NASDAQ</Header>
+
+        <Content>
+          <Stock/>
+        </Content>
+      </Layout>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

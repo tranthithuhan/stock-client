@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import axios from 'axios'
+import 'antd/dist/antd.css'
 
 import './index.css';
 import App from './App';
