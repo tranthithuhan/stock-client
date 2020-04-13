@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import axios from 'axios'
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import store from './reducers/index'
+import { BACKEND_LINK } from './const'
+
+
+const onRequestSuccess = config => ({ ...config, url: BACKEND_LINK + config.url })
+axios.interceptors.request.use(onRequestSuccess)
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
